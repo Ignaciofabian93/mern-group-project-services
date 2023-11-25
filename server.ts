@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", authRouter);
 
 console.log("logeando alguna cosa");
+console.log("logeando david");
 
 app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}`);
