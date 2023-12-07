@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { hash, compare, genSalt } from "bcrypt";
 import { sign } from "jsonwebtoken";
-import User from "../models/userModel";
+import User from "../models/user";
 
 const serverError = "Server error";
 
