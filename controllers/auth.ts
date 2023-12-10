@@ -3,8 +3,6 @@ import { hash, compare, genSalt } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import User from "../models/user";
 
-const serverError = "Server error";
-
 export const loginUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
@@ -23,7 +21,7 @@ export const loginUser = async (req: Request, res: Response) => {
       }
     }
   } catch (error) {
-    res.status(500).json({ message: serverError, error });
+    res.status(500).json({ message: error });
   }
 };
 
@@ -46,6 +44,6 @@ export const registerUser = async (req: Request, res: Response) => {
       }
     }
   } catch (error) {
-    res.status(500).json({ message: serverError, error });
+    res.status(500).json({ message: error });
   }
 };
