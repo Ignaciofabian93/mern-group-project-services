@@ -4,7 +4,7 @@ import { createServer } from "http";
 import { Server, Socket } from "socket.io";
 import { config } from "dotenv";
 import user from "./routes/user";
-// import Message from "./models/message";
+import room from "./routes/room";
 import connectDB from "./config/connectDb";
 
 config();
@@ -22,6 +22,7 @@ app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ message: "Ok" });
 });
 app.use("/api", user);
+app.use("/api", room);
 
 const server = createServer(app);
 const io = new Server(server, {
