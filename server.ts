@@ -91,6 +91,18 @@ io.on("connection", (socket: Socket) => {
     }
   );
 
+  // Controla el envío de imágenes
+  socket.on(
+    "sendImage",
+    (roomName: string, imageData: string, username: string) => {
+      io.to(roomName).emit("message", {
+        username,
+        text: "Envío una imagen",
+        image: imageData, // You can pass the image data to the client
+      });
+    }
+  );
+
   // Controla la desconexión
   socket.on("disconnect", () => {
     console.log("User disconnected");
