@@ -1,12 +1,19 @@
 import mongoose from "mongoose";
 
+const MessageSchema = new mongoose.Schema({
+  username: { type: String, required: true },
+  text: { type: String, required: true },
+  image: { type: String },
+  date: { type: Date, default: Date.now },
+});
+
 const RoomSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
     },
-    messages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }],
+    messages: [MessageSchema],
   },
   { timestamps: true }
 );

@@ -1,11 +1,20 @@
 import mongoose from "mongoose";
 
+const ContentSchema = new mongoose.Schema({
+  text: { type: String, required: true },
+  image: { type: String },
+});
+
 const MessageSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    content: { type: String, required: true },
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    content: [ContentSchema],
     room: { type: mongoose.Schema.Types.ObjectId, ref: "Room", required: true },
-    timestamp: { type: Date, default: Date.now },
+    date: { type: Date, default: Date.now },
   },
   { timestamps: true }
 );

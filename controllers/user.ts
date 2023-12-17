@@ -1,30 +1,7 @@
 import { Request, Response } from "express";
-import { hash, compare, genSalt } from "bcrypt";
-import { sign } from "jsonwebtoken";
+import { hash, genSalt } from "bcrypt";
 import User from "../models/user";
 import { firebaseAuth } from "../config/firebase";
-
-export const loginUser = async (req: Request, res: Response) => {
-  try {
-    const { email, password } = req.body;
-    const checkUser = await User.findOne({ email });
-    if (!checkUser) {
-      res.status(400).json({ message: "User not found" });
-    } else {
-      const match = await compare(password, checkUser.password);
-      if (!match) {
-        res.status(400).json({ message: "Invalid password" });
-      } else {
-        const token = sign({ id: checkUser._id }, process.env.JWT_SECRET, {
-          expiresIn: "1d",
-        });
-        res.status(200).json({ message: "Login successful", token });
-      }
-    }
-  } catch (error) {
-    res.status(500).json({ message: error });
-  }
-};
 
 export const registerUser = async (req: Request, res: Response) => {
   try {
@@ -64,6 +41,18 @@ export const registerUser = async (req: Request, res: Response) => {
   }
 };
 
+export const updateUser = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { name, email, password, photo, uid } = req.body;
+    const firebaseUser = await firebaseAuth.getUserByEmail(email);
+    console.log("firebase user: ", firebaseUser);
+    // const user = await User.findByIdAndUpdate()
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+};
+
 export const getUsers = async (req: Request, res: Response) => {
   try {
     const users = await User.find();
@@ -79,8 +68,8 @@ export const getUsers = async (req: Request, res: Response) => {
 
 export const getUser = async (req: Request, res: Response) => {
   try {
-    const { uid } = req.body;
-    const user = await User.findOne({ uid });
+    const { id } = req.params;
+    const user = await User.findOne({ uid: id });
     if (!user) {
       res.status(401).json({ message: "User not found" });
     } else {

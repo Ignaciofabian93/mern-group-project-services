@@ -1,0 +1,30 @@
+GET http://localhost:8080/api/users
+
+###
+POST http://localhost:8080/api/rooms
+Content-Type: application/json
+
+{
+  "name": "MongoDB"
+}
+
+###
+PUT http://localhost:8080/api/rooms/657c30eeab6ee7d42577692e
+Content-Type: application/json
+
+{
+  "user": "UgmDsMzFKhSadA7cnHZT8E7RwRm1"
+}
+
+
+###
+
+POST http://localhost:8080/api/register
+Content-Type: application/json
+
+{
+  "name": "David",
+  "email": "dmmtapia@gmail.com",
+  "password": "123456",
+  "photo": ""
+}
