@@ -50,7 +50,6 @@ export const updateRoom = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const { messages } = req.body;
-    console.log("messages!!: ", messages);
 
     const checkRoom = await Room.findOne({ _id: id });
     if (!checkRoom) {
@@ -61,6 +60,7 @@ export const updateRoom = async (req: Request, res: Response) => {
       username: messages.username,
       text: messages.text,
       image: messages.image ? messages.image : null,
+      date: messages.date,
     });
 
     const updatedRoom = await Room.findByIdAndUpdate(

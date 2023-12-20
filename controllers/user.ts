@@ -41,18 +41,6 @@ export const registerUser = async (req: Request, res: Response) => {
   }
 };
 
-export const updateUser = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const { name, email, password, photo, uid } = req.body;
-    const firebaseUser = await firebaseAuth.getUserByEmail(email);
-    console.log("firebase user: ", firebaseUser);
-    // const user = await User.findByIdAndUpdate()
-  } catch (error) {
-    res.status(500).json({ message: error });
-  }
-};
-
 export const getUsers = async (req: Request, res: Response) => {
   try {
     const users = await User.find();
