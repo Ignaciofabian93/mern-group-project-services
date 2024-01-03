@@ -22,6 +22,7 @@ const corsOptions = {
     "https://mern-group-project.vercel.app",
     "https://mern-group-project-ignaciofabian93.vercel.app",
     "https://mern-group-project-5ehm4f4zp-ignaciofabian93.vercel.app",
+    "https://mern-group-project-53p1o2kep-ignaciofabian93.vercel.app",
   ],
 };
 
